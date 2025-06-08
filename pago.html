@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Suscripción - MediAlert Premium</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<link rel="icon" href="img/logo.png" type="image/png" />
+</head>
+<body class="bg-gray-100 text-gray-800">
+
+<header class="bg-indigo-700 text-white p-4 flex justify-between items-center shadow">
+<h1 class="text-xl font-bold">MediAlert</h1>
+<nav class="space-x-4">
+    <a href="index.html" class="hover:underline">Inicio</a>
+    <a href="perfil.html" class="hover:underline">Perfil</a>
+    <button onclick="cerrarSesion()" class="bg-red-500 px-3 py-1 rounded hover:bg-red-600">Cerrar sesión</button>
+</nav>
+</header>
+
+<main class="max-w-3xl mx-auto mt-12 px-4">
+<div class="bg-white p-8 rounded-xl shadow-lg text-center">
+    <h2 class="text-3xl font-bold text-indigo-700 mb-2">MediAlert Premium</h2>
+    <p class="text-gray-600 mb-6">Acceso completo a funciones avanzadas de recordatorio y gestión de medicamentos.</p>
+
+    <div class="bg-gray-50 rounded-lg p-6 border border-indigo-200">
+    <h3 class="text-2xl font-semibold mb-2">¡1 mes gratis!</h3>
+    <p class="text-lg mb-4">Luego solo <span class="text-green-600 font-bold">$2.50/mes</span></p>
+    <ul class="text-left mb-6 space-y-2 text-sm text-gray-700">
+        <li>✅ Historial de medicamentos</li>
+        <li>✅ Integración con Dispositivos Wearables</li>
+        <li>✅ Modo de Vacaciones / Viaje(ubicación de farmacias cercanas según tu localización)</li>
+        <li>✅ Temporizador de Medicación + Alarmas Avanzadas</li>
+    </ul>
+    <!-- Boton de pago Wompi -->
+    <div class="wompi_button_widget inline-block"
+        data-url-pago="https://pagos.wompi.sv/IntentoPago/Redirect?id=8e8c5560-9321-437e-b250-30b6a4482e98&esWidget=1"
+        data-render="widget">
+    </div>
+    </div>
+</div>
+</main>
+    <!-- Script que da Wompi para que funcione el boton -->
+<script src="https://pagos.wompi.sv/js/wompi.pagos.js"></script>
+<script>
+function cerrarSesion() {
+    localStorage.removeItem("token");
+    window.location.href = "login.html";
+}
+</script>
+</body>
+</html>

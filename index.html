@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>MediAlert</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="icon" type="image/png" href="img/logo.png"/>
+    <link rel="stylesheet" href="css/styles.css" />
+</head>
+<body class="bg-gray-50">
+    <header class="bg-indigo-600 text-white p-4 flex justify-between items-center shadow">
+        <div class="flex items-center gap-4">
+            <img src="img/logop.png" alt="Logo MediAlert" class="w-12 h-12 rounded-full" />
+            <div>
+                <h1 class="text-2xl font-bold">MediAlert</h1>
+                <p class="text-sm">Tu recordatorio de medicamentos</p>
+            </div>
+    
+
+        </div>
+        <div class="flex gap-4 items-center">
+            <a href="chat.html" class="bg-white text-indigo-600 px-3 py-1 rounded hover:bg-indigo-100 transition">Chat</a>
+            <a href="perfil.html" class="bg-white text-indigo-600 px-3 py-1 rounded hover:bg-indigo-100 transition">Perfil</a>
+            <a href="pago.html" class="bg-white text-indigo-600 px-3 py-1 rounded hover:bg-green-500 transition">¡Suscríbete!</a>
+        </div>
+        <label class="theme-switch">
+            <input type="checkbox" id="toggle-tema">
+            <span class="slider"></span>
+        </label>
+    </header>
+
+    <main class="max-w-2xl mx-auto mt-6 p-4 bg-white rounded-xl shadow">
+        <section id="medicamentos">
+            <h2 class="text-xl font-semibold mb-2">MIS MEDICAMENTOS</h2>
+            <button onclick="descargarPDF()" class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600">📄 Descargar PDF</button>
+            <button onclick="regenerarAlertas()" class="bg-white-500 text-white px-4 py-2 rounded hover:bg-white-600">.</button>
+            <div class="text-center mt-6">
+
+            <form id="form-medicamento" class="bg-white shadow rounded-xl p-4 mb-6 space-y-4">
+                <input type="text" id="nombre" placeholder="Nombre" class="w-full border p-2 rounded" required />
+                <input type="number" id="frecuencia" placeholder="Frecuencia (horas)" class="w-full border p-2 rounded" required />
+                <input type="time" id="hora_inicio" class="w-full border p-2 rounded" required />
+                <button type="submit" class="bg-indigo-600 text-white px-4 py-2 rounded hover:bg-indigo-700 transition">Agregar</button>
+            </form>
+            <ul id="lista-medicamentos"></ul>
+        </section>
+
+        <hr class="my-6" />
+
+        <section id="alertas">
+            <h2 class="text-xl font-semibold mb-2">Alertas próximas</h2>
+            <div id="lista-alertas">
+<div id="alertas-vacias" class="text-gray-500">✅ No hay alertas pendientes para hoy.</div>
+</div>
+
+            <div id="lista-alertas"></div>
+        </section>
+    </main>
+    
+
+    <div id="notificacion" class="fixed bottom-4 left-1/2 transform -translate-x-1/2 bg-green-100 text-green-800 px-4 py-2 rounded shadow hidden"></div>
+
+    <audio id="sonidoAlarma" preload="auto">
+<source src="assets/alarmapip.mp3" type="audio/mpeg">
+</audio>
+
+<div id="alerta-flotante" class="fixed bottom-5 right-5 bg-red-600 text-white px-4 py-3 rounded shadow-lg hidden z-50">
+¡Es hora de tomar tu medicamento!
+</div>
+
+<script src="js/app.js"></script>
+
+
+
+</body>
+</html>

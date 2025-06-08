@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8" />
+    <title>Chat - MediAlert</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="icon" type="image/png" href="img/logo.png"/>
+</head>
+<body class="bg-gray-100 min-h-screen flex flex-col">
+    <a href="index.html" class="inline-block bg-gray-300 text-gray-800 px-3 py-1 rounded hover:bg-gray-400 ml-4 mt-2">
+        ← Volver
+    </a>
+
+    <header class="bg-indigo-600 text-white p-4 text-center font-bold">
+        Chat con MediAlert 💬
+    </header>
+
+    <main class="flex-1 p-4 max-w-xl mx-auto w-full">
+        <!-- ✅ Solo un chat-box -->
+        <div id="chat-box" class="flex flex-col gap-2 p-4 overflow-y-auto h-[400px] bg-white rounded shadow"></div>
+
+        <form id="form-chat" class="flex gap-2 mt-4">
+            <input type="text" id="mensaje" placeholder="Escribe un mensaje..." class="flex-1 p-2 border rounded" required />
+            <button class="bg-indigo-600 text-white px-4 py-2 rounded hover:bg-indigo-700">Enviar</button>
+        </form>
+    </main>
+
+    <script src="js/chat.js"></script>
+
+</body>
+</html>

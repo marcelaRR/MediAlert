@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Mi Perfil - MediAlert</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<link rel="icon" type="image/png" href="img/logo.png"/>
+<link rel="stylesheet" href="css/styles.css" />
+</head>
+<script>
+if (!localStorage.getItem("token")) {
+    alert("Debes iniciar sesión primero.");
+    window.location.href = "login.html";
+}
+</script>
+
+<body class="bg-gray-100">
+
+<!-- ENCABEZADO -->
+<header class="bg-indigo-600 text-white p-4 flex justify-between items-center shadow">
+<div class="flex items-center gap-4">
+    <img src="img/logop.png" alt="Logo" class="w-12 h-12 rounded-full" />
+    <div>
+    <h1 class="text-xl font-bold">Mi Perfil</h1>
+    <p class="text-sm">Gestión de cuenta y pagos</p>
+    </div>
+</div>
+<div class="flex gap-4 items-center">
+    <a href="index.html" class="bg-white text-indigo-600 px-3 py-1 rounded hover:bg-indigo-100 transition">Inicio</a>
+    <a href="chat.html" class="bg-white text-indigo-600 px-3 py-1 rounded hover:bg-indigo-100 transition">Chat</a>
+        <a href="pago.html" class="bg-white text-indigo-600 px-3 py-1 rounded hover:bg-green-500 transition">
+    ¡Suscríbete!</a>
+
+    
+</div>
+</header>
+
+<!-- CONTENIDO -->
+<main class="max-w-3xl mx-auto mt-8 p-6 bg-white shadow-2xl rounded-xl space-y-6">
+
+<!-- CAMBIO DE CONTRASEÑA -->
+<h2 class="text-2xl font-bold text-indigo-700 mb-4">Cambiar contraseña</h2>
+
+<form id="form-password" class="space-y-4">
+    <input type="password" id="actual" placeholder="Contraseña actual" class="w-full p-3 border rounded focus:ring-2 focus:ring-indigo-500" />
+    <input type="password" id="nueva" placeholder="Nueva contraseña" class="w-full p-3 border rounded focus:ring-2 focus:ring-indigo-500" />
+    <input type="password" id="confirmar" placeholder="Confirmar nueva contraseña" class="w-full p-3 border rounded focus:ring-2 focus:ring-indigo-500" />
+    <button type="submit" class="w-full bg-indigo-600 text-white py-2 rounded hover:bg-indigo-700 transition">Guardar cambio</button>
+</form>
+
+<button onclick="cerrarSesion()" class="bg-red-500 text-white px-3 py-1 rounded hover:bg-red-600 transition">
+    Cerrar sesión
+    </button>
+
+<!-- PERFIL -->
+<div class="border-t pt-6">
+    <h3 class="text-xl font-bold text-gray-700 mb-2">Información personal</h3>
+    <p><strong>Nombre:</strong> Marcela</p>
+    <p><strong>Email:</strong> marcelaarecinos27@gmail.com</p>
+</div>
+</main>
+
+
+
+<!-- WOMPI -->
+<script src="https://checkout.wompi.co/widget.js"></script>
+
+<script>
+function cerrarSesion() {
+localStorage.removeItem("token");
+window.location.href = "login.html";
+}
+</script>
+
+<!-- CAMBIO DE CONTRASEÑA -->
+<script>
+document.getElementById("form-password").addEventListener("submit", function(e) {
+e.preventDefault();
+const actual = document.getElementById("actual").value;
+const nueva = document.getElementById("nueva").value;
+const confirmar = document.getElementById("confirmar").value;
+
+fetch("http://127.0.0.1:8000/api/cambiar-contrasena/", {
+    method: "POST",
+    headers: {
+    "Content-Type": "application/json",
+    "Authorization": `Token ${localStorage.getItem("token")}`
+    },
+    body: JSON.stringify({ actual, nueva, confirmar })
+})
+.then(res => res.json().then(data => ({ ok: res.ok, data })))
+.then(({ ok, data }) => {
+    if (!ok) throw new Error(data.error || "Error al cambiar la contraseña");
+    alert("Contraseña cambiada correctamente");
+    document.getElementById("form-password").reset();
+})
+.catch(err => {
+    alert("❌ " + err.message);
+});
+});
+</script>
+
+</body>
+</html>
